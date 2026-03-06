@@ -1,11 +1,31 @@
-<div align="center">
+# FMS Vision Pro
 
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
+基于计算机视觉技术的 FMS (Functional Movement Screen) 自动化识别系统。
 
-  <h1>Built with AI Studio</h2>
+## 技术架构
 
-  <p>The fastest path from prompt to production with Gemini.</p>
+本项目旨在提供高精度的实时动作捕捉与评分，核心技术栈（模拟/规划）包括：
 
-  <a href="https://aistudio.google.com/apps">Start building</a>
+- **YOLO26**: 用于超高精度的实时人体关键点检测与边界框回归。相较于早期版本，YOLO26 在边缘设备上提供了极低的延迟和更高的鲁棒性。
+- **Kalman Filter (卡尔曼滤波)**: 用于对 YOLO26 输出的关键点坐标进行平滑处理，消除视频帧间的抖动，预测被遮挡部位的运动轨迹，确保关节角度计算的连续性。
+- **Transformer**: 用于时序动作分析。通过收集连续帧的骨骼序列数据，Transformer 模型能够理解动作的上下文，精准判断动作的起始、结束以及代偿模式，从而给出科学的 FMS 评分（0-3分）。
 
-</div>
+## 核心功能
+
+1. **项目选择**: 支持 FMS 标准的 7 项测试（深蹲、跨栏步、直线弓箭步、肩部灵活性、主动直腿上抬、躯干稳定俯卧撑、旋转稳定性）。
+2. **实时识别**: 调用摄像头进行实时动作捕捉，侧边栏同步显示各关键关节（髋、膝、踝、肩等）的角度变化曲线。
+3. **智能评分**: 动作结束后，系统基于 Transformer 的时序分析输出 0-3 分的评分。
+4. **反馈与建议**: 提供详细的动作分析反馈和针对性的改进建议。
+
+## 开发与运行
+
+本项目前端基于 React 19 + Vite + Tailwind CSS 构建。
+
+```bash
+npm install
+npm run dev
+```
+
+## 开源协议
+
+MIT License

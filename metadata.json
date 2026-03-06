@@ -1,0 +1,7 @@
+{
+  "name": "FMS Vision Pro",
+  "description": "Automated Functional Movement Screen (FMS) recognition system using advanced computer vision.",
+  "requestFramePermissions": [
+    "camera"
+  ]
+}
